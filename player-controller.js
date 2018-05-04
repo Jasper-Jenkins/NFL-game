@@ -58,10 +58,14 @@ function PlayersController() {
         playersService.filterPlayers(drawPlayerSelect);
     }
 
-
-
-
     this.addToTeam = function addToTeam(id) {
+        // var positionCheck = playersService.getMyTeam
+        // var check = false;
+        // for (var i = 0; i < positionCheck.length; i++) {
+        //     if (positionCheck[id].position ==  ) {
+
+        //     }
+        // }
         playersService.addToTeam(id, drawPlayerOnTeam);
     };
 

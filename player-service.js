@@ -50,24 +50,21 @@ function PlayersService(callback) {
          cb(playersData)
   }
 
-  this.sortByName = function sortByName(searchValue ,cb){
-    for(var i = 0; i < playersData.length;i++){
-      var sortedMember = playersData.find(function (char) {
-             return char.firstname != searchValue
-           })
-           //indexOf itterates over an array to find the element it was passed and returns the index, if it doesnt find it it will return -1
-           var index = playersData.indexOf(sortedMember)
-           //splice removes object from array
-           playersData.splice(index, 1)
-          }
+  this.sortByName = function sortByName(searchValue, cb){
+    var results = playersData.filter(function(player){
+        return player.firstname == searchValue
+    })
 debugger
-           cb(playersData)
+           cb(results)
   }
 
-  
+  // this.positionCheck = function positionCheck(myTeam, id){ // take in array and position
+
+  // }
 
   this.addToTeam = function addToTeam(newCharacterId, cb) { ///////---- this may need to change from ID to another searchable element
     //Find itterates over an array, looking at each object in the array, passing it to a function, that function must return true or false to determine if that object is the one you are looking for. It will return the first instance of that thing
+    
     var newMember = playersData.find(function (char) {
       return char.id == newCharacterId
     })
@@ -75,6 +72,8 @@ debugger
     cb(myTeam);
 
   };
+
+
 // this.searchForPlayers = function searchForPlayers(){
 
 // }
