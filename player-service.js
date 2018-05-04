@@ -12,7 +12,7 @@ function PlayersService(callback){
            playersData = JSON.parse(localData);
            //return will short-circuit the loadPlayersData function
            //this will prevent the code below from ever executing
-           return callback()
+           return callback(playersData)
        }
        //if not go get that data
        var url = "https://bcw-getter.herokuapp.com/?url=";
@@ -25,7 +25,7 @@ function PlayersService(callback){
            console.log('Writing Player Data to localStorage')
            localStorage.setItem('playersData', JSON.stringify(playersData))
            console.log('Finished Writing Player Data to localStorage')
-           callback()
+           callback(playersData)
          });
      } 
      
@@ -44,7 +44,22 @@ this.addMyTeam = function addMyTeam(newCharacterId, cb) { ///////---- this may n
     myTeam.push(newMember)
     cb(myTeam);
   };
+  
+  this.removeFromTeam = function removeFromTeam(removeId, draw) {
+    debugger
+    // This is for removing characters from myTeam
+    var removeMember = myTeam.find(function (char) {
+      return char.id == removeId
+    })
 
+    //indexOf itterates over an array to find the element it was passed and returns the index, if it doesnt find it it will return -1
+    var index = myTeam.indexOf(removeMember)
+    //splice removes object from array
+    myTeam.splice(index, 1)
+
+    draw(myTeam)
+
+  };
 
 loadPlayersData(); //call the function above every time we create a new service
 }

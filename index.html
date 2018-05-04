@@ -8,7 +8,14 @@
 </head>
 <body>
     <!-- Search field will be here -->
-    <section class="containers"></section>
+    <div class="container-fluid">
+        <form class="form-inline row d-flex justify-content-center align-items-center find-music" onsubmit="app.controllers.playerController.getPlayers(event)">
+            <!--DO NOT MODIFY THE ID OR ONCLICK ATTRIBUTES IN THIS FORM-->
+            <div class="form-group ">
+                <input type="text" class="form-control" name="player" placeholder="Enter Name, team, or position" />
+                <button type="submit" class="btn btn-primary" id="search-player-inventory">Get results</button>
+            </div>
+        </form>
    
     <!-- Set up elements for the players to be displayed-->
     <section class="containers">
@@ -20,8 +27,8 @@
     </section> 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="nfl-service.js"></script>
-    <script src="nfl-controller.js"></script>
+    <script src="player-service.js"></script>
+    <script src="player-controller.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
