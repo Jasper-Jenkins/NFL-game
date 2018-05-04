@@ -1,63 +1,75 @@
 function PlayersController() {
 
     //PRIVATE
-    var playersService = new PlayersService(drawPlayerSelect)
+    var playersService = new PlayersService(drawPlayerSelect) //drawPlayerSelect
+
     this.getPlayers = function getPlayers(e) {
-      debugger
         e.preventDefault();
-        var firstname = e.target.firstname.value;
-      debugger
-        // var players = playersService.getPlayers; //after get music by artist returns what are you doing with the objects?
-        // document.getElementById("playerPick").innerText=players
-      //  drawPlayerSelect()
-      }
+        var firstname = e.target.player.value; //assign value from user input
+        if (firstname == "") {
+        } else {
+            playersService.sortByName(firstname, drawPlayerSelect)
+        }
+        //drawPlayerSelect(players)
+    }
 
     function drawPlayerSelect(chars) {
         var template = "<h1>Choose Wisely</h1>";
         console.log(chars)
-        for (var i = 0; i < 3; i++) {   ////chars.length
+        for (var i = 0; i < 5; i++) {   ////chars.length
             var char = chars[i];
             template += `
-                <div>
+                <div class="players">
                  <img src="${char.photo}" alt ="${char.firstname}">
                  <p>Name: ${char.firstname}</p>
-                 <button onclick="app.controller.playersController.addToTeam(${char.id})">Add to team</button>
+                 <p>Name: ${char.position}</p>
+                 <button class="btn btn-primary"onclick="app.controller.playersController.addToTeam(${char.id})">Add to team</button>
                 </div>
             `
-           }
+        }
         document.getElementById("playerPick").innerHTML = template;
+        //  debugger
     }
 
     function drawPlayerOnTeam(chars) {
         var template = "<h1>Team Assemled</h1>";
         console.log(chars)
-        // for (var i = 0; i < 3; i++) {   ////chars.length
+        for (var i = 0; i < chars.length; i++) {   ////chars.length
             var char = chars[i];
             template += `
-                <div>
-                 <img src="${char.photo}" alt ="${char.firstname}">
-                 <p>Name: ${char.firstname}</p>
-                 <button onclick="app.controller.playersController.myTeam(${char.id})">Add to team</button>
+                <div class="players">
+             
+                <img src="${char.photo}" alt ="${char.firstname}">
+                <p>Name: ${char.firstname}</p>
+                <p>Name: ${char.position}</p>
+                <button onclick="app.controller.playersController.removeFromTeam(${char.id})">Remove From Team</button>
                 </div>
             `
-            debugger 
-     //       }
-        document.getElementById("playerPick").innerHTML = template;
+            //   debugger 
+        }
+        document.getElementById("myTeam").innerHTML = template;
     }
 
     //PUBLIC
 
-   // document.getElementById('myTeam').innerHTML = playersService.getPlayers()
-debugger
+
+
+    function filterPlayers() { //filters through the players[]and removes elements that dont have a first name 
+        playersService.filterPlayers(drawPlayerSelect);
+    }
 
 
 
 
-this.addToTeam = function addToTeam(id) {
- playersService.addToTeam(id, drawPlayerOnTeam);
-};
+    this.addToTeam = function addToTeam(id) {
+        playersService.addToTeam(id, drawPlayerOnTeam);
+    };
 
-// this.removeFromTeam = function removeFromTeam(id) {
-//   playersService.removeFromTeam(id, drawMyTeam)
-// };
+    this.removeFromTeam = function removeFromTeam(id) {
+        playersService.removeFromTeam(id, drawPlayerOnTeam)
+    };
+    console.log()
+    debugger
+    filterPlayers(); // this may need to be moved up to the to getPlayers once I removed the auto fill. 
+    debugger
 }

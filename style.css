@@ -1,0 +1,16 @@
+
+.player-pick{
+    background-color:red;
+}
+.myTeam{
+    background-color:blue;
+}
+.players{
+    background-color:green;
+    border:1px black solid;
+    margin-bottom:15px;
+}
+.players p{
+    width:100%;
+    margin:0px;
+}
