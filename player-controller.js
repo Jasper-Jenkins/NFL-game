@@ -1,28 +1,36 @@
 function PlayersController() {
 
     //PRIVATE
-    var playersService = new PlayersService(drawPlayerSelect) //drawPlayerSelect
+    var playersService = new PlayersService() //drawPlayerSelect
+   
 
-    this.getPlayers = function getPlayers(e) {
+    this.searchPlayers = function searchPlayers(e) { 
         e.preventDefault();
+       // playersService.loadPlayers()
+        
+        debugger  // console.log(playersService.loadPlayers())
         var firstname = e.target.player.value; //assign value from user input
         if (firstname == "") {
+        //    filterPlayers()
         } else {
             playersService.sortByName(firstname, drawPlayerSelect)
+         //   filterPlayers()
         }
-        //drawPlayerSelect(players)
     }
 
     function drawPlayerSelect(chars) {
         var template = "<h1>Choose Wisely</h1>";
         console.log(chars)
-        for (var i = 0; i < 5; i++) {   ////chars.length
+        
+
+        for (var i = 0; i < chars.length; i++) {   ////chars.length
             var char = chars[i];
             template += `
                 <div class="players">
                  <img src="${char.photo}" alt ="${char.firstname}">
                  <p>Name: ${char.firstname}</p>
                  <p>Name: ${char.position}</p>
+                 <p>Name: ${char.pro_team}</p>
                  <button class="btn btn-primary"onclick="app.controller.playersController.addToTeam(${char.id})">Add to team</button>
                 </div>
             `
@@ -42,6 +50,7 @@ function PlayersController() {
                 <img src="${char.photo}" alt ="${char.firstname}">
                 <p>Name: ${char.firstname}</p>
                 <p>Name: ${char.position}</p>
+                <p>Name: ${char.pro_team}</p>
                 <button onclick="app.controller.playersController.removeFromTeam(${char.id})">Remove From Team</button>
                 </div>
             `
@@ -73,7 +82,7 @@ function PlayersController() {
         playersService.removeFromTeam(id, drawPlayerOnTeam)
     };
     console.log()
-    debugger
-    filterPlayers(); // this may need to be moved up to the to getPlayers once I removed the auto fill. 
-    debugger
+
+ // this may need to be moved up to the to getPlayers once I removed the auto fill. 
+
 }
