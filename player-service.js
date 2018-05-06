@@ -9,7 +9,7 @@ function PlayersService() {//callback
     var localData = localStorage.getItem('playersData');
     //if they do, pull from there
     if (localData) {
-//update
+      //update
       playersData = JSON.parse(localData);
       //return will short-circuit the loadPlayersData function
       //this will prevent the code below from ever executing
@@ -27,7 +27,7 @@ function PlayersService() {//callback
       localStorage.setItem('playersData', JSON.stringify(playersData))
       console.log('Finished Writing Player Data to localStorage')
       //callback(playersData)//playersData
-    }); 
+    });
 
 
   }
@@ -38,17 +38,6 @@ function PlayersService() {//callback
   }
   this.getMyTeam = function getMyTeam() {  // retrieve an array of my team members that are objects
     return myTeam
-  }
-  function filterPlayers2(){
-    for (var i = 0; i < playersData.length; i++) {
-      var removeMember = playersData.find(function (char) {
-        return char.firstname == ""
-      })
-      //indexOf itterates over an array to find the element it was passed and returns the index, if it doesnt find it it will return -1
-      var index = playersData.indexOf(removeMember)
-      //splice removes object from array
-      playersData.splice(index, 1)
-    }
   }
 
   this.filterPlayers = function filterPlayers(cb) {
@@ -61,24 +50,21 @@ function PlayersService() {//callback
       //splice removes object from array
       playersData.splice(index, 1)
     }
-   
+
     cb(playersData)
   }
 
-  this.sortByName = function sortByName(searchValue, cb) {
-    // if (searchValue == "" || searchValue == undefined) {
-    
-    // } else {
+  this.sortBySearch = function sortBySearch(searchValue, cb) {
     var results = playersData.filter(function (player) {
-       if(player.firstname == searchValue){
+      if (player.firstname.toLowerCase().includes(searchValue.toLowerCase())) {
         return true
-      } else if(player.position == searchValue){
+      } else if (player.position == searchValue) {
         return true
-      } else if(player.pro_team == searchValue){
+      } else if (player.pro_team == searchValue) {
         return true
       }
     });
-    console.log(results)
+    //console.log(results)
     cb(results)
 
     // }
@@ -88,13 +74,33 @@ function PlayersService() {//callback
 
   // }
 
+  function checkForPlayers(player) { //check for players 
+
+    if (myTeam != []) {
+      for (var i = 0; i < myTeam.length; i++) {
+        if ((player.id == myTeam[i].id) || player.position == myTeam[i].position) {
+          return true
+        }
+      }
+    }
+  }
+
+
   this.addToTeam = function addToTeam(newCharacterId, cb) { ///////---- this may need to change from ID to another searchable element
     //Find itterates over an array, looking at each object in the array, passing it to a function, that function must return true or false to determine if that object is the one you are looking for. It will return the first instance of that thing
 
     var newMember = playersData.find(function (char) {
       return char.id == newCharacterId
     })
-    myTeam.push(newMember)
+    if (checkForPlayers(newMember)) {
+      console.log("Nothing should happen")
+    } else {
+      myTeam.push(newMember)
+    }
+
+
+
+
     cb(myTeam);
 
   };
@@ -123,8 +129,8 @@ function PlayersService() {//callback
     return loadPlayersData()
   }
 
-  
 
- //loadPlayersData(); //call the function above every time we create a new service
+
+  //loadPlayersData(); //call the function above every time we create a new service
 
 }
