@@ -2,14 +2,14 @@ function PlayersService() {//callback
   var playersData = []
   var myTeam = []
 
-  //...
+  //... 
   //...
   function loadPlayersData() {
     //check if the player already has a copy of the NFL playersData
     var localData = localStorage.getItem('playersData');
     //if they do, pull from there
     if (localData) {
-
+//update
       playersData = JSON.parse(localData);
       //return will short-circuit the loadPlayersData function
       //this will prevent the code below from ever executing
