@@ -1,14 +1,30 @@
 
+body{
+    background-image: url(img/nfl-body-bg-img.jpg);
+    background-attachment: fixed;
+}
+
 .player-pick{
-    background-color:red;
+ background-color: white;
 }
 .myTeam{
-    background-color:blue;
+background-color:white;
+}
+
+.card-body{
+    padding:2px;
+}
+
+.players img{
+    max-width:150px
 }
 .players{
-    background-color:green;
-    border:1px black solid;
+    background-color:white;
+    border:10px black solid;
+    border-radius:5px;
     margin-bottom:15px;
+    width: auto;
+    display:inline-block ;
 }
 .players p{
     width:100%;

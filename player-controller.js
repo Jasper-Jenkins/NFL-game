@@ -27,10 +27,10 @@ function PlayersController() {
             var char = chars[i];
             template += `
                 <div class="players">
-                 <img src="${char.photo}" alt ="${char.firstname}">
-                 <p>Name: ${char.firstname}</p>
-                 <p>Name: ${char.position}</p>
-                 <p>Name: ${char.pro_team}</p>
+                 <img src="${char.photo}" alt ="${char.fullname}">
+                 <p>Name: ${char.fullname}</p>
+                 <p>Position: ${char.position}</p>
+                 <p>Team: ${char.pro_team}</p>
                  <button class="btn btn-primary"onclick="app.controller.playersController.addToTeam(${char.id})">Add to team</button>
                 </div>
             `
@@ -45,13 +45,14 @@ function PlayersController() {
         for (var i = 0; i < chars.length; i++) {  
             var char = chars[i];
             template += `
-                <div class="players">             
-                <img src="${char.photo}" alt ="${char.firstname}">
-                <p>Name: ${char.firstname}</p>
-                <p>Name: ${char.position}</p>
-                <p>Name: ${char.pro_team}</p>
-                <button onclick="app.controller.playersController.removeFromTeam(${char.id})">Remove From Team</button>
-                </div>
+                <div class="players card">             
+                <img class="card-img-top" src="${char.photo}" alt="${char.fullname}">
+                   <div class="card-body">     
+                    <p class="">Name: ${char.fullname}</p>
+                    <p class="">Position: ${char.position}</p>
+                    <p class="">Team: ${char.pro_team}</p>
+                    <button class="btn btn-primary" onclick="app.controller.playersController.removeFromTeam(${char.id})">Remove Player</button>
+                </div></div>
             `
             
         }
@@ -66,7 +67,7 @@ function PlayersController() {
         playersService.filterPlayers(drawPlayerSelect);
     }
 
-    
+
     this.addToTeam = function addToTeam(id) {
         playersService.addToTeam(id, drawPlayerOnTeam);
     };

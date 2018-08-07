@@ -64,7 +64,9 @@ function PlayersService() {//callback
         return true
       }
     });
-    //console.log(results)
+    //
+    
+    console.log(results)
     cb(results)
 
     // }
@@ -97,10 +99,6 @@ function PlayersService() {//callback
     } else {
       myTeam.push(newMember)
     }
-
-
-
-
     cb(myTeam);
 
   };
